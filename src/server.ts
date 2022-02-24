@@ -4,6 +4,9 @@ import cors from 'cors';
 import rateLimit from 'express-rate-limit';
 import { bugsnagMiddleware } from './middleware/bugsnag';
 import { createApolloMiddleware } from './middleware/apolloServer';
+import indexController from './controllers/indexController';
+import docsController from './controllers/docsController';
+import apiRoutes from './routes/api';
 
 const limiter = rateLimit({
   windowMs: 1000, // 1 second
@@ -30,9 +33,9 @@ export default async () => {
   apolloMiddleware.applyMiddleware({ app });
 
   // Register routes
-  app.get('/', require('./controllers/indexController'));
-  app.get('/docs', require('./controllers/docsController'));
-  app.use('/api', require('./routes/api'));
+  app.get('/', indexController);
+  app.get('/docs', docsController);
+  app.use('/api', apiRoutes);
 
   app.use(function(req: express.Request, res: express.Response) {
     res.status(404);
