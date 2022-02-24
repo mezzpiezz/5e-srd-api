@@ -10,7 +10,7 @@ const limiter = rateLimit({
   max: 10000, // limit each IP to 10000 requests per windowMs
 });
 
-module.exports = async () => {
+export default async () => {
   const app = express();
 
   // Middleware stuff
@@ -34,7 +34,7 @@ module.exports = async () => {
   app.get('/docs', require('./controllers/docsController'));
   app.use('/api', require('./routes/api'));
 
-  app.use(function(req: express.Request, res: express.Response, next: express.NextFunction) {
+  app.use(function(req: express.Request, res: express.Response) {
     res.status(404);
 
     // TODO: Add a fun 404 page
