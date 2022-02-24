@@ -1,19 +1,17 @@
-const express = require('express');
-const morgan = require('morgan');
-const cors = require('cors');
-const rateLimit = require('express-rate-limit');
-const { bugsnagMiddleware } = require('./middleware/bugsnag');
-const { createApolloMiddleware } = require('./middleware/apolloServer');
+import express from 'express';
+import morgan from 'morgan';
+import cors from 'cors';
+import rateLimit from 'express-rate-limit';
+import { bugsnagMiddleware } from './middleware/bugsnag';
+import { createApolloMiddleware } from './middleware/apolloServer';
 
 const limiter = rateLimit({
   windowMs: 1000, // 1 second
   max: 10000, // limit each IP to 10000 requests per windowMs
 });
 
-const createApp = async () => {
+module.exports = async () => {
   const app = express();
-  // enable cors in preflight
-  app.options('*', cors());
 
   // Middleware stuff
   app.set('view engine', 'ejs');
@@ -36,7 +34,7 @@ const createApp = async () => {
   app.get('/docs', require('./controllers/docsController'));
   app.use('/api', require('./routes/api'));
 
-  app.use(function(req, res, _next) {
+  app.use(function(req: express.Request, res: express.Response, next: express.NextFunction) {
     res.status(404);
 
     // TODO: Add a fun 404 page
@@ -53,6 +51,3 @@ const createApp = async () => {
   app.use(bugsnagMiddleware.errorHandler);
   return app;
 };
-
-// module.exports = app;
-module.exports = createApp;
