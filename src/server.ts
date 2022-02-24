@@ -24,7 +24,8 @@ export default async () => {
   app.use('/css', express.static(__dirname + '/css'));
   app.use('/public', express.static(__dirname + '/public'));
   app.use(morgan('short'));
-  app.use(cors({ origin: '*' }));
+  // Enable all CORS requests
+  app.use(cors());
 
   app.use(limiter);
 
