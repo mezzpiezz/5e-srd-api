@@ -1,5 +1,5 @@
 import * as express from 'express';
-import ApiController from '../controllers/apiController';
+import * as ApiController from '../controllers/apiController';
 import {
   AbilityScoresHandler,
   AlignmentsHandler,
@@ -56,4 +56,4 @@ router.use('/subraces', SubracesHandler);
 router.use('/traits', TraitsHandler);
 router.use('/weapon-properties', WeaponPropertiesHandler);
 
-module.exports = router;
+export default router;
