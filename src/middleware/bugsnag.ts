@@ -13,4 +13,4 @@ const createBugsnagMiddleware = () => {
 
 const bugsnagMiddleware = createBugsnagMiddleware();
 
-module.exports.bugsnagMiddleware = bugsnagMiddleware;
+export { bugsnagMiddleware };

@@ -19,7 +19,10 @@ export default async () => {
   // Middleware stuff
   app.set('view engine', 'ejs');
   app.set('views', __dirname + '/views');
-  app.use(bugsnagMiddleware.requestHandler);
+  if (bugsnagMiddleware?.requestHandler) {
+    app.use(bugsnagMiddleware.requestHandler);
+  }
+
   app.use('/js', express.static(__dirname + '/js'));
   app.use('/css', express.static(__dirname + '/css'));
   app.use('/public', express.static(__dirname + '/public'));
@@ -52,6 +55,8 @@ export default async () => {
     return res.send({ error: 'Not found' });
   });
 
-  app.use(bugsnagMiddleware.errorHandler);
+  if (bugsnagMiddleware?.errorHandler) {
+    app.use(bugsnagMiddleware.errorHandler);
+  }
   return app;
 };

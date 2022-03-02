@@ -13,4 +13,4 @@ const createApolloMiddleware = async () => {
   return server;
 };
 
-module.exports = { createApolloMiddleware };
+export { createApolloMiddleware };
