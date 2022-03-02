@@ -1,6 +1,6 @@
-const { ApolloServer } = require('apollo-server-express');
-const responseCachePlugin = require('apollo-server-plugin-response-cache');
-const schema = require('../graphql/schema');
+import { ApolloServer } from 'apollo-server-express';
+import responseCachePlugin from 'apollo-server-plugin-response-cache';
+import schema from '../graphql/schema';
 
 const createApolloMiddleware = async () => {
   const server = new ApolloServer({
